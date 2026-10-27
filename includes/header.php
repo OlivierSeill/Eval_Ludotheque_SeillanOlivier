@@ -4,11 +4,19 @@
 //Variable d'affichage du menu de navigation
 $nav = "";
 
-//Pour l'instant le menu de base n'a pas encore besoin de vérifier si l'utilisateur est connecté ou non.
-$nav = "<a href='../index.php'>Acceuil</a>
-        <a href='../inscription.php'>Inscription</a>
-        <a href='../connexion.php'>Connexion</a>";
-
+//Désormais je dois changer mon menu de naviagtion en fonction du fait que l'utilisateur est connecté ou non:
+if(isset($_SESSION['id'])){
+    //Le menu lorsque l'utilisateur est connecté en tant que membre
+    $nav = "<p>Bonjour {$_SESSION['prenom']}</p>
+            <a href='../index.php'>Acceuil</a>
+            <a href='../ajout-jeu.php'>Ajouter un jeu</a>
+            <a href='../deconnexion.php'>Se déconnecter</a>";
+} else {
+    //Le menu lorsque l'utilisateur n'est pas connecté en tant que membre
+    $nav = "<a href='../index.php'>Acceuil</a>
+            <a href='../inscription.php'>Inscription</a>
+            <a href='../connexion.php'>Connexion</a>";
+}
 ?>
 
 <!DOCTYPE html>
