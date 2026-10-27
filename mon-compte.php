@@ -60,12 +60,12 @@ include('includes/header.php');
 
 <main>
         <section>
-            <h2>Mon compte</h2>
-            <h3>Mes informations :</h3>
+            <h1>Mon compte</h1>
+            <h2>Mes informations :</h2>
             <ul>
                 <?php echo($detailsMembre) ?>
             </ul>
-            <h3>Mes Jeux :</h3>
+            <h2>Mes Jeux :</h2>
             <ul>
                 <?php echo($listeJeux) ?>
             </ul>

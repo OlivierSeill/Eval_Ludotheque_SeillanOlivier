@@ -1,0 +1,52 @@
+* {
+    margin : 0;
+    padding : 0;
+}
+
+body{
+    display:grid;
+}
+
+header, footer{
+    background-color : rgb(133, 126, 126);
+    height: 10vh;
+    text-align: center;
+    align-content: center;
+}
+        
+header {
+    color: #fff;
+    a, a:visited {
+        color: rgb(39, 87, 247);
+        text-decoration: none;
+        margin-top: 2vh;
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+}
+
+main {
+    padding : 5vh 10vh 5vh;
+}
+
+h1,h2 {
+    margin-top : 10px;
+    margin-bottom : 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: grid;
+    justify-content: center;
+    input, select {
+        width : auto;
+    }
+    row-gap: 1vh;
+}
+
+footer {
+    color : #fff;
+}

@@ -43,9 +43,9 @@ include('includes/header.php');
 
     <main>
         <section>
-            <h2>Accueil Ludothèque</h2>
-            <p>Bienvenu sur la ludotheque !</p>
-            <h3>Voici la liste de nos jeux :</h3>
+            <h1>Accueil Ludothèque</h1>
+            <p>Bienvenu sur la ludothèque !</p>
+            <h2>Voici la liste de nos jeux :</h2>
             <ul>
             <?php echo($listeLudotheque) ?>
             </ul>

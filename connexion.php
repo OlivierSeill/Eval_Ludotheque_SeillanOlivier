@@ -71,7 +71,7 @@ include('includes/header.php');
 
     <main>
         <section>
-            <h2>Connexion</h2>
+            <h1>Connexion</h1>
             <form action="" method="post">
                 <label for="email">Email :</label>
                 <input type="text" name="email" id="email"

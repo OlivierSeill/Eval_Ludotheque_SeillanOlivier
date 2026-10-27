@@ -154,7 +154,7 @@ include('includes/header.php');
 
     <main>
         <section>
-            <h2>Ajouter un jeu</h2>
+            <h1>Ajouter un jeu</h1>
             <form action="" method="post">
                 <label for="titre">Titre :</label>
                 <input type="text" name="titre" id="titre"

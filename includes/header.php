@@ -8,13 +8,13 @@ $nav = "";
 if(isset($_SESSION['id'])){
     //Le menu lorsque l'utilisateur est connecté en tant que membre
     $nav = "<p>Bonjour {$_SESSION['prenom']}</p>
-            <a href='../index.php'>Acceuil</a>
+            <a href='../index.php'>Accueil</a>
             <a href='../ajout-jeu.php'>Ajouter un jeu</a>
             <a href='../mon-compte.php'>Mon compte</a>
             <a href='../deconnexion.php'>Se déconnecter</a>";
 } else {
     //Le menu lorsque l'utilisateur n'est pas connecté en tant que membre
-    $nav = "<a href='../index.php'>Acceuil</a>
+    $nav = "<a href='../index.php'>Accueil</a>
             <a href='../inscription.php'>Inscription</a>
             <a href='../connexion.php'>Connexion</a>";
 }
@@ -26,7 +26,7 @@ if(isset($_SESSION['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludothèque</title>
-    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 <body>
         <header>

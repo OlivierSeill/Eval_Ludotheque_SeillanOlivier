@@ -88,7 +88,7 @@ include('includes/header.php');
 
     <main>
             <section>
-                <h2>Inscription</h2>
+                <h1>Inscription</h1>
                 <form action="" method="post">
                     <label for="prenom">Prenom :</label>
                     <input type="text" name="prenom" id="prenom"
