@@ -91,10 +91,14 @@ include('includes/header.php');
                 <h2>Inscription</h2>
                 <form action="" method="post">
                     <label for="prenom">Prenom :</label>
-                    <input type="text" name="prenom" id="prenom">
-                    <label for="nom">Nom <input type="text" name="nom" id="nom"></label>
+                    <input type="text" name="prenom" id="prenom"
+                        value="<?php if (array_key_exists('prenom', $_POST)) {echo htmlspecialchars($_POST['prenom']);}?>">
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" id="nom"
+                        value="<?php if (array_key_exists('nom', $_POST)) {echo htmlspecialchars($_POST['nom']);}?>">
                     <label for="email">Email :</label>
-                    <input type="text" name="email" id="email">
+                    <input type="text" name="email" id="email"
+                        value="<?php if (array_key_exists('email', $_POST)) {echo htmlspecialchars($_POST['email']);}?>">
                     <label for="password">Mot de Passe :</label>
                     <input type="password" name="password" id="password">
                     <input type="submit" name="submitInscription">

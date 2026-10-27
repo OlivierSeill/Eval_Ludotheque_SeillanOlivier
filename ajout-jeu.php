@@ -63,40 +63,62 @@ if(isset($_POST['submitAjout'])){
                         $duree = $_POST['duree'];
                         $idCategorie = $_POST['categorie'];
 
-                        //Vérification qu'aucun jeu portant le même titre n’existe déjà dans le catalogue
+                        //BONUS : vérification que la catégorie existe :
                         try{
                             $pdo = new PDO('mysql:host=localhost;dbname=ludotheque','root','',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-                            $requestExist = $pdo->prepare('SELECT j.titre FROM jeu j WHERE titre=?;');
-                            $requestExist->bindParam(1,$titre,PDO::PARAM_STR);
-                            $requestExist->execute();
-                            $existingJeu = $requestExist->fetchAll();
+                            $requestExistCat = $pdo->prepare('SELECT c.nom_categorie FROM categorie c WHERE id_categorie=?;');
+                            $requestExistCat->bindParam(1,$idCategorie,PDO::PARAM_STR);
+                            $requestExistCat->execute();
+                            $existingCat = $requestExistCat->fetchAll();
 
-                            //Si la requête est vide le jeu n'existe pas encore je peux donc l'enregister
-                            if (empty($existingJeu)) {
-                        
-                                $requestInsert=$pdo->prepare("INSERT INTO jeu (titre,joueurs_min, joueurs_max, duree, id_categorie, id_membre)
-                                VALUES (?,?,?,?,?,?);");
+                            //Si la requête n'est pas vide la catégorie existe bien, je poursuis donc le processus 
+                            if (!empty($existingCat)) {
+                                
+                                 //Vérification qu'aucun jeu portant le même titre n’existe déjà dans le catalogue
+                                try{
+                                    $pdo = new PDO('mysql:host=localhost;dbname=ludotheque','root','',[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-                                $requestInsert->bindParam(1,$titre,PDO::PARAM_STR);
-                                $requestInsert->bindParam(2,$joueursMin,PDO::PARAM_STR);
-                                $requestInsert->bindParam(3,$joueursMax,PDO::PARAM_STR);
-                                $requestInsert->bindParam(4,$duree,PDO::PARAM_STR);
-                                $requestInsert->bindParam(5,$idCategorie,PDO::PARAM_STR);
-                                $requestInsert->bindParam(6,$_SESSION['id'],PDO::PARAM_STR);
+                                    $requestExist = $pdo->prepare('SELECT j.titre FROM jeu j WHERE titre=?;');
+                                    $requestExist->bindParam(1,$titre,PDO::PARAM_STR);
+                                    $requestExist->execute();
+                                    $existingJeu = $requestExist->fetchAll();
 
-                                $requestInsert->execute();
+                                    //Si la requête est vide le jeu n'existe pas encore je peux donc l'enregister
+                                    if (empty($existingJeu)) {
+                                
+                                        $requestInsert=$pdo->prepare("INSERT INTO jeu (titre,joueurs_min, joueurs_max, duree, id_categorie, id_membre)
+                                        VALUES (?,?,?,?,?,?);");
 
-                                $messageAjout="{$_SESSION['prenom']} votre jeu a bien été ajouté!";
+                                        $requestInsert->bindParam(1,$titre,PDO::PARAM_STR);
+                                        $requestInsert->bindParam(2,$joueursMin,PDO::PARAM_STR);
+                                        $requestInsert->bindParam(3,$joueursMax,PDO::PARAM_STR);
+                                        $requestInsert->bindParam(4,$duree,PDO::PARAM_STR);
+                                        $requestInsert->bindParam(5,$idCategorie,PDO::PARAM_STR);
+                                        $requestInsert->bindParam(6,$_SESSION['id'],PDO::PARAM_STR);
+
+                                        $requestInsert->execute();
+
+                                        $messageAjout="{$_SESSION['prenom']} votre jeu a bien été ajouté!";
+
+                                    } else {
+                                        //Message si le jeu existe déjà
+                                        $messageAjout="Ce jeu existe déjà!";
+                                    }
+
+                                }catch(EXCEPTION $error){
+                                    die($error->getMessage());
+                                }
+                                
 
                             } else {
-                                //Message si le jeu existe déjà
-                                $messageAjout="Ce jeu existe déjà!";
+                                //Message si la catégorie n'existe pas
+                                $messageAjout="Cette catégorie n'existe pas!";
                             }
 
                         }catch(EXCEPTION $error){
                             die($error->getMessage());
-                        }
+                        }     
 
                     }else{
                         //Message durée ne peut être inf. ou égal à 0
@@ -135,13 +157,17 @@ include('includes/header.php');
             <h2>Ajouter un jeu</h2>
             <form action="" method="post">
                 <label for="titre">Titre :</label>
-                <input type="text" name="titre" id="titre">
+                <input type="text" name="titre" id="titre"
+                    value="<?php if (array_key_exists('titre', $_POST)) {echo htmlspecialchars($_POST['titre']);}?>">
                 <label for="joueursMin">Nombres de joueurs minimum :</label>
-                <input type="number" name="joueursMin" id="joueursMin">
+                <input type="number" name="joueursMin" id="joueursMin"
+                    value="<?php if (array_key_exists('joueursMin', $_POST)) {echo htmlspecialchars($_POST['joueursMin']);}?>">
                 <label for="joueursMax">Nombres de joueurs maximum :</label>
-                <input type="number" name="joueursMax" id="joueursMax">
+                <input type="number" name="joueursMax" id="joueursMax"
+                    value="<?php if (array_key_exists('joueursMax', $_POST)) {echo htmlspecialchars($_POST['joueursMax']);}?>">
                 <label for="duree">Durée d'une partie en minutes :</label>
-                <input type="number" name="duree" id="duree">
+                <input type="number" name="duree" id="duree"
+                    value="<?php if (array_key_exists('duree', $_POST)) {echo htmlspecialchars($_POST['duree']);}?>">
                 <label for="categorie">Catégorie :</label>
                 <select name="categorie" id="categorie">
                     <optgroup label="Au choix :">

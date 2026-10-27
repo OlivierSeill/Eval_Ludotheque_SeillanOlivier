@@ -10,6 +10,7 @@ if(isset($_SESSION['id'])){
     $nav = "<p>Bonjour {$_SESSION['prenom']}</p>
             <a href='../index.php'>Acceuil</a>
             <a href='../ajout-jeu.php'>Ajouter un jeu</a>
+            <a href='../mon-compte.php'>Mon compte</a>
             <a href='../deconnexion.php'>Se déconnecter</a>";
 } else {
     //Le menu lorsque l'utilisateur n'est pas connecté en tant que membre

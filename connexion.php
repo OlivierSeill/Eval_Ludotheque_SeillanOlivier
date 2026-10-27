@@ -74,7 +74,8 @@ include('includes/header.php');
             <h2>Connexion</h2>
             <form action="" method="post">
                 <label for="email">Email :</label>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email"
+                    value="<?php if (array_key_exists('email', $_POST)) {echo htmlspecialchars($_POST['email']);}?>">
                 <label for="password">Mot de Passe :</label>
                 <input type="password" name="password" id="password">
                 <input type="submit" name="submitConnexion">
